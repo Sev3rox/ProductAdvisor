@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProductAdvisor</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <img src="~/photos/user.png" width="40" height="40" />
+
+
+                <!--
+                    ViewData["Title"] = "Obsługa rezerwacji";
+                    Layout = "../Shared/_LayoutUser.cshtml";
+                    -->
+                <!--
+                Task<IActionResult>
+
+                var username = HttpContext.Session.GetString("username");
+                var  accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+                if (accountt.role == 0)
+                return RedirectToPage("../Common/NoAccessUser");
+                return Page();
+                    -->
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Common/MainUser">Strona główna</a>
+                        </li>
+                        &nbsp&nbsp&nbsp
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Produkty i powiązane
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Products/IndexUser">Produkty</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Products/Ulubione">Ulubione</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Categories/IndexUser">Kategorie</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Companies/IndexUser">Firmy</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/KalendarzPremier/IndexUser">KalendarzPremier</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/KalendarzPremier/Obserwowane">ObserwowanePremiery</a>
+                            </div>
+                        </li>
+                        &nbsp&nbsp&nbsp
+
+
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ForumUzytkownika/Index">Forum</a>
+                        </li>
+                        &nbsp&nbsp&nbsp
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Głosowaniee/IndexUser">Głosowania</a>
+                        </li>
+                        &nbsp&nbsp&nbsp
+
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Logowanie/WelcomeUser">Moje konto</a>
+                        </li>
+                        &nbsp&nbsp&nbsp
+
+                        <li>
+                            <div class="form-group">
+                                <form method="get" class="SearchBox">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="search" class="form-control" name="SearchTerm" value="@ViewData["SearchTerm"]" asp-route-searchTerm="SearchTerm" />
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-primary" asp-page="/Products/IndexUser">Szukaj</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        &nbsp&nbsp&nbsp
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Logowanie/LogOut">Wyloguj</a>
+                        </li>
+
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted"
+            style="background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+            border: solid;
+            border-width: 1px ">
+        <div class="container">
+            &copy; 2020 - ProductAdvisor - <a asp-area="" asp-page="/PrivacyUser">Privacy</a>
+            - <a asp-area="" asp-page="/Contact">Contact</a>
+            - <a asp-area="" asp-page="/About Us"></a>
+            <a href="https://www.facebook.com/profile.php?=7432645066541" target="_blank" rel="noopener noreferrer"
+               style="float:right">
+                <img src="~/photos/facebook.png" id="fb" width="30" />
+            </a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

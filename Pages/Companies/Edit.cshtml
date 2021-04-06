@@ -1,0 +1,74 @@
+﻿@page
+@model webapp.Pages.Companies.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Edit</h1>
+
+    <h4>Company</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Company.ID" />
+                <div class="form-group">
+                    <img src="data:image;base64,@System.Convert.ToBase64String(Model.Company.Image)" width="80" height="80" />
+                    <input type="file" value="app.jpg" asp-for="Upload" class="form-control" accept="image/jpeg,image/jpg,image/png" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Company.Name" class="control-label"></label>
+                    <input asp-for="Company.Name" class="form-control" />
+                    <span asp-validation-for="Company.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Company.Description" class="control-label"></label>
+                    <input asp-for="Company.Description" class="form-control" />
+                    <span asp-validation-for="Company.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Company.Date" class="control-label"></label>
+                    <input asp-for="Company.Date" class="form-control" />
+                    <span asp-validation-for="Company.Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Company.Location" class="control-label"></label>
+                    <input asp-for="Company.Location" class="form-control" />
+                    <span asp-validation-for="Company.Location" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</div>

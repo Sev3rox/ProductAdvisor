@@ -1,0 +1,64 @@
+﻿@page
+@model webapp.Pages.ProductsDescription.CreateModel
+
+@{
+    ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutUser.cshtml";
+}
+
+<h4>Poprawa opisu produktu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductDescription.Description" class="control-label"></label>
+                <input asp-for="ProductDescription.Description" class="form-control" />
+                <span asp-validation-for="ProductDescription.Description" class="text-danger"></span>
+            </div>
+            <div style="display: none;" class="form-group">
+                <label asp-for="ProductDescription.ProductId" class="control-label"></label>
+                <select asp-for="ProductDescription.ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<h2>Dane produktu do którego zgłaszane są poprawki opisu/nowy opis:</h2>
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Product[0].Image)
+    </dt>
+    <dd class="col-sm-10">
+        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Product[0].Image)" width="500" />
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Product[0].Name)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Product[0].Name)
+    </dd>
+
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Product[0].Description)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Product[0].Description)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Product[0].Company)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Product[0].Company.Name)
+    </dd>
+</dl>
+<div>
+    <a asp-page="/Products/DetailsUser" asp-route-id="@Model.ProductDescription.ProductId">Wróć do strony produktu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

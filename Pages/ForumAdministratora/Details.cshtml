@@ -1,0 +1,127 @@
+﻿@page
+@model webapp.Pages.ForumAdministratora.DetailsModel
+
+@{ ViewData["Title"] = "Details";
+    Layout = "../Shared/_LayoutWorker.cshtml";}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Details</h1>
+
+    <div>
+        <h4>Forum</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Forum.name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Forum.name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Forum.tresc)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Forum.tresc)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Forum.data)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Forum.data)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Forum.userr)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Forum.userr)
+            </dd>
+        </dl>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Forum.Comments)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Forum.Comments)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.komentarz)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.data)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.userr) |
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Prawa
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @if (@Model.uzytkownik.role != 2)
+                {
+                    @if (@Model.uzytkownik.role2 == 2)
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="odblokujKomentowanie">Odblokuj komentowanie</a>
+                    }
+                    else
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="zablokujKomentowanie">Zablokuj komentowanie</a>
+                    }
+                    <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="zbanuj">Zbanuj</a>
+                    @if (@Model.uzytkownik.role2 != 1)
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="wyroznij">Wyróżnij</a>
+                    }
+                    else
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="cofnijWyroznienie">Cofnij wyróżnienie</a>
+                    }
+                }
+                else
+                {
+                    <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="odbanuj">Odbanuj</a>
+                }
+            </div>
+        </div>
+    </td>
+    <td>
+        <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+        <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a> |
+               <td>
+                                    <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@item.userr" asp-route-xpom="kom" asp-route-pid="@item.ForumID">Profil użytkownika</a>
+                                </td>
+   
+    </td>
+</tr>            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Forum.ID">Edit</a> |
+     
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>

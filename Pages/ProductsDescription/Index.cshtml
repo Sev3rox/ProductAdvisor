@@ -1,0 +1,65 @@
+﻿@page
+@model webapp.Pages.ProductsDescription.IndexModel
+
+@{
+    ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<h1>Dodane/zgłoszone do poprawki opisy</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductDescription[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductDescription[0].Product)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model.ProductDescription)
+    {
+@if (item.hasBeenRead == false)
+{
+<tbody id="unread" style="background-color: #FFFF99">
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            <a asp-page="./Details" asp-route-id="@item.Id">Szczegóły</a> |
+            <a asp-page="./Delete" asp-route-id="@item.Id">Usuń</a> |
+            <form method="post">
+                <input type="hidden" name="id" value="@item.Id" />
+                <input type="submit" name="submitButton" value="Zaznacz jako przeczytane" input />
+            </form>
+        </td>
+    </tr>
+</tbody> }
+                else
+                {
+<tbody>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            <a asp-page="./Details" asp-route-id="@item.Id">Szczegóły</a> |
+            <a asp-page="./Delete" asp-route-id="@item.Id">Usuń</a>
+        </td>
+    </tr>
+</tbody>
+}}
+</table>
+

@@ -1,0 +1,58 @@
+﻿@page
+@model webapp.Pages.WelcomeUserModel
+@{ ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutUser.cshtml"; }
+@using Microsoft.AspNetCore.Http
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignUp</title>
+</head>
+<body>
+    <style>
+        body {
+            background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+
+    <div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+        Welcome @HttpContext.Session.GetString("username")
+        <br />
+        Id: @Model.account.Id
+        <br />
+        Email:  @Model.account.Email
+        <br />
+        Rola: @Model.account.role
+        <br />
+        <a asp-page="/Index" asp-page-handler="logout">Logout</a>
+        <a asp-page="ProfileUser">Change Profile</a>
+
+        <table>
+            @foreach (var item in Model.cats)
+            {
+    <tr>
+        <td>
+            <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" width="40" height="40" />
+        </td>
+
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+    </tr>
+}
+        </table>
+    </div>
+</body>
+</html>

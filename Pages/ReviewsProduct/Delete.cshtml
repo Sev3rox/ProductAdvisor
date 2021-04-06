@@ -1,0 +1,70 @@
+﻿@page
+@model webapp.Pages.ReviewsProduct.DeleteModel
+
+@{ ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutWorker.cshtml"; }
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Delete</h1>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>ReviewProduct</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ReviewProduct.komentarz)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ReviewProduct.komentarz)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ReviewProduct.data)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ReviewProduct.data)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ReviewProduct.userr)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ReviewProduct.userr)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ReviewProduct.Number)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ReviewProduct.Number)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ReviewProduct.ProductID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ReviewProduct.ProductID)
+            </dd>
+        </dl>
+
+        <form method="post">
+            <input type="hidden" asp-for="ReviewProduct.ID" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-page="../Products/Details" asp-route-id="@Model.ReviewProduct.ProductID">Back to Product</a>
+        </form>
+    </div>
+</div>

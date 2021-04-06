@@ -1,0 +1,64 @@
+﻿@page
+@model webapp.Pages.ProGlos.IndexModel
+
+@{
+    ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Index</h1>
+    <p>
+        <a asp-page="../Głosowaniee/Index">Powrót</a>
+    </p>
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductGlosowanie[0].Product)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductGlosowanie[0].Głosowanie)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ProductGlosowanie)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Głosowanie.Id)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    </td>
+</tr>            }
+        </tbody>
+    </table>
+</div>

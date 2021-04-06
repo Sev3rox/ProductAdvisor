@@ -1,0 +1,87 @@
+﻿@page
+@model webapp.Pages.KalendarzPremier.IndexUserModel
+
+@{
+    ViewData["Title"] = "IndexUser";
+    Layout = "../Shared/_LayoutUser.cshtml";
+}
+
+<h1>IndexUser</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form method="get">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                Wyszukiwanie
+            </div>
+            <div class="col">
+                Wyszukiwanie kategorii
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group-append">
+                    <input class="form-control" asp-for="SearchTerm" />
+                    <button type="submit" class="btn btn-primary">Szukaj</button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group-append">
+                    <input class="form-control" asp-for="CategoryTerm" />
+                    <button type="submit" class="btn btn-primary">Cat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].Premiera)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.catsss)
+        {
+            <tr>
+                <td>
+                    <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" width="80" height="80" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Premiera)
+                </td>
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Ulub" asp-route-id="@item.Id">Ulubione</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

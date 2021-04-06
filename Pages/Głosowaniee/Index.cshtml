@@ -1,0 +1,65 @@
+﻿@page
+@model webapp.Pages.Głosowaniee.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+    <p>
+        <a asp-page="../ProGlos/Index">Produkty Głosowanie</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Głosowanie[0].Month)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Głosowanie[0].Year)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Głosowanie)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Month)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Year)
+    </td>
+    <td>
+        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+</tr>            }
+        </tbody>
+    </table>
+</div>

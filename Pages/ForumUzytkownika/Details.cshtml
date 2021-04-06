@@ -1,0 +1,101 @@
+﻿@page
+@model webapp.Pages.ForumUzytkownika.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "../Shared/_LayoutUser.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Details</h1>
+
+    <div>
+        <h4>Forum</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Forum.name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Forum.name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Forum.tresc)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Forum.tresc)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Forum.data)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Forum.data)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Forum.userr)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Forum.userr)
+            </dd>
+        </dl>
+    </div>
+    <h4>Komentarze</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.comment.komentarz)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.comment.data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.comment.userr)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Forum.Comments)
+            {
+        @if (item.hidden == false)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.komentarz)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userr)
+                </td>
+            </tr>
+        }
+
+    }
+        </tbody>
+    </table>
+    <div>
+        <a asp-page="/CommentsUzytkownika/Create" asp-route-id="@Model.Forum.ID">Dodaj komentarz</a> |
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>

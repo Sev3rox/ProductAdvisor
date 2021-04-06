@@ -1,0 +1,84 @@
+﻿@page
+@model webapp.Pages.ProductsDescription.DetailsModel
+
+@{
+    ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Szczegóły zgłoszenia</h1>
+    @*<form method="post">
+            <div class="form-group">
+                <input type="submit" name="submitButton" value="Zmień opis produktu na proponowany" input />
+            </div>
+
+        </form>*@
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductDescription.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProductDescription.Description)
+            </dd>
+            @*<dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ProductDescription.Product)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ProductDescription.Product.Name)
+                </dd>*@
+        </dl>
+    </div>
+    <h2>Dane produktu do którego zostały zgłoszone poprawki opisu/nowy opis:</h2>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductDescription.Product.Image)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="data:image;base64,@System.Convert.ToBase64String(Model.ProductDescription.Product.Image)" width="500" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductDescription.Product.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProductDescription.Product.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductDescription.Product.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProductDescription.Product.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductDescription.Product.Company)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProductDescription.Product.Company.Name)
+        </dd>
+
+    </dl>
+    <div>
+        @*<a asp-page="./Edit" asp-route-id="@Model.ProductDescription.Id">Edit</a> |*@
+        <a asp-page="./Index">Wróć do listy zgłoszonych opisów</a>
+    </div>
+</div>

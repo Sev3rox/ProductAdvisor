@@ -1,0 +1,74 @@
+﻿@page
+@model webapp.Pages.Prawa.Z_zakazem_komentowaniaModel
+@{ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Z zakazem komentowania</h1>
+
+    <p>
+        <a asp-page="Index">Back To list    </a>
+
+
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account[0].Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account[0].Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account[0].role)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account[0].role2)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Account)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.role)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.role2)
+                    </td>
+                    <td>
+                        <a asp-page="./Zakaż" asp-route-id="@item.Id">Cofnij zakaz  </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

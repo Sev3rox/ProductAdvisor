@@ -1,0 +1,226 @@
+﻿@page
+@model webapp.Pages.Products.DetailsModel
+@{ var cookieValue = Request.Cookies["MyCookie"];
+    List<String> elem = null;
+    bool has = false;
+    if (cookieValue != null)
+    {
+        elem = cookieValue.Split(",").ToList();
+        has = elem.Contains(Model.Product.Id.ToString());
+    } }
+@{
+    ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/style.css" />
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    @if (Model.pomstr == "xyz")
+    {
+<div>
+    <a asp-page="../Common/MainWorker">Back to List</a>
+</div> }
+else
+{
+<a asp-page="./Index">Back to List</a>}
+    <h1>Details</h1>
+
+    <div>
+        <div class="row">
+            <div class="col">
+                <h4>Product</h4>
+            </div>
+            @if (has == false)
+            {
+    <div class="col">
+        <form method="post" enctype="multipart/form-data">
+            <input type="submit" name="submitButton" value="Dodaj do porównania" input />
+        </form>
+    </div>}
+            <div class="col">
+                <a asp-area="" asp-page="/Products/CompareProducts">Porównaj wybrane produkty</a>
+            </div>
+
+        </div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Image)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="data:image;base64,@System.Convert.ToBase64String(Model.Product.Image)" width="500" />
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Name)
+            </dd>
+            <dt class="col-sm-2">
+                <span class="fa fa-star checked"></span> Ocena
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.srednia)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.quantity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.quantity)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Price)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </dt>
+            <dd class="col-sm-10">
+                <div class="row">
+                    <div class="col">
+                        @Html.DisplayFor(model => model.Product.Description)
+                    </div>
+                    <div class="col">
+                        <a asp-page="/ProductsDescription/Create" asp-route-id="@Model.Product.Id">Popraw/dodaj opis</a>
+                    </div>
+                </div>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Company)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Company.Name)
+            </dd>
+
+
+
+        </dl>
+        Kategorie: @Model.all
+        <br>
+        <br>
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <select asp-for="Product.CompanyID" asp-items="ViewBag.CategoryID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="submitButton" value="Dodaj Kategorie" input />
+            </div>
+            <div class="form-group">
+                <select asp-for="Product.Id" asp-items="ViewBag.CategoryID2"></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" name="submitButton" value="Usuń Kategorie" input />
+            </div>
+
+        </form>
+
+        <h4> Recenzje: @Model.Recenzje.Count</h4>
+        <hr />
+        <table class="table">
+
+
+            @foreach (var item in Model.Recenzje)
+            {
+    <tbody style="        background-color: #FFFF99">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Recenzje[0].userr)&nbsp;
+                @Html.DisplayFor(modelItem => item.userr)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Recenzje[0].data)&nbsp;
+                @Html.DisplayFor(modelItem => item.data)
+            </td>
+            <td>
+                <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@item.userr" asp-route-xpom="rec" asp-route-pid="@item.ProductID">Profil użytkownika</a>
+            </td>
+            <td>
+                @for (int i = 0; i < item.Number; i++)
+                {
+    <span class="fa fa-star checked"></span>}
+                @for (int i = 0; i < 5 - item.Number; i++)
+                {
+    <span class="fa fa-star"></span>}
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.komentarz)
+            </td>
+
+
+        </tr>
+    </tbody>
+                    @if (item.CommentsReview.Count != 0)
+                    {
+    <tr><th></th><th><h9> Komentarze:</h9></th></tr>
+                        <tbody>
+                            @for (int i = 0; i < item.CommentsReview.Count; i++)
+                            {
+                                Model.comrecenzje1 = item.CommentsReview.ToList();
+        <tr>
+            <td></td>
+            <td style="        background-color: #FFFFCC">
+                @Html.DisplayNameFor(model => model.comrecenzje1[0].userr)&nbsp;
+                @Html.DisplayFor(modelItem => Model.comrecenzje1[i].userr)
+            </td>
+            <td style="        background-color: #FFFFCC">
+                @Html.DisplayNameFor(model => model.comrecenzje1[0].data)&nbsp;
+                @Html.DisplayFor(modelItem => Model.comrecenzje1[i].data)
+            </td>
+            <td style="        background-color: #FFFFCC">
+                @Html.DisplayFor(modelItem => Model.comrecenzje1[i].komentarz)
+            </td>
+            <td>
+                <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@Model.comrecenzje1[i].userr" asp-route-xpom="rec" asp-route-pid="@item.ProductID">Profil użytkownika</a>
+            </td>
+
+        </tr>
+}
+
+                        </tbody>
+                                            <tr><th></th></tr>
+}}
+
+        </table>
+
+
+        @if (Model.pomstr == "xyz")
+        {
+    <div>
+        <a asp-page="../Common/MainWorker">Back to List</a>
+    </div> }
+else
+{
+    <a asp-page="./Index">Back to List</a>}
+        <style>
+            .checked {
+                color: orange;
+            }
+        </style>
+    </div>
+</div>

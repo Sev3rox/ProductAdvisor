@@ -1,0 +1,107 @@
+﻿@page
+@model webapp.Pages.ForumAdministratora.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Forum[0].name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Forum[0].tresc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Forum[0].data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Forum[0].userr)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.ForumTitled.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.ForumTitled[i].name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.ForumTitled[i].tresc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.ForumTitled[i].data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.ForumTitled[i].userr)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@Model.ForumTitled[i].ID">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@Model.ForumTitled[i].ID">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@Model.ForumTitled[i].ID">Delete</a> |
+                        <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@Model.Forum[i].userr" asp-route-xpom="post">Profil użytkownika</a>
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="z" value="@Model.ForumTitled[i].ID" />
+                            <input type="submit" name="submitButton" value="odWyroznij" />
+                        </form>
+                    </td>
+                </tr>
+            }
+            @for (int i = 0; i < Model.Forum.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Forum[i].name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Forum[i].tresc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Forum[i].data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Forum[i].userr)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@Model.Forum[i].ID">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@Model.Forum[i].ID">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@Model.Forum[i].ID">Delete</a> |
+                        <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@Model.Forum[i].userr" asp-route-xpom="post">Profil użytkownika</a>
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="z" value="@Model.Forum[i].ID" />
+                            <input type="submit" name="submitButton" value="Wyroznij" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,61 @@
+﻿@page
+@model webapp.Pages.Categories.IndexUserModel
+
+@{ ViewData["Title"] = "Obsługa rezerwacji";
+                Layout = "../Shared/_LayoutUser.cshtml"; }
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+    <h1>Index</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category[0].cName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category[0].cskrot)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category[0].copis)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Category)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.cName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cskrot)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.copis)
+    </td>
+    <td>
+
+        <a href="/Products/IndexUser?SearchTerm=&CategoryTerm=@Html.DisplayFor(modelItem => item.cName)&SelectedTags=">Produkty</a>
+    </td>
+</tr>            }
+        </tbody>
+    </table>
+</div>

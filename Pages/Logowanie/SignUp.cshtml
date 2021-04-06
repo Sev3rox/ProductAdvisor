@@ -1,0 +1,73 @@
+﻿@page
+@model webapp.Pages.SignUpModel
+@{ ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutNotLoged.cshtml"; }
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignUp</title>
+    @Model.Msg
+</head>
+<body>
+    <style>
+        body {
+            background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+
+    <div style="    width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        max-width: 400px;
+        margin: 0 auto;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+    ">
+        <h3>Sign Up</h3>
+        <form method="post" asp-page="signup">
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td>
+                        <input asp-for="@Model.account.Username" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>
+                        <input asp-for="@Model.account.Password" required />
+                    </td>
+                    <td>
+                        <input type="image" src="~/photos/password.png" id="fb" width="25" onclick="changePasswordView()" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>
+                        <input type="email" asp-for="@Model.account.Email" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <input type="submit" value="Save" />
+                        <br />
+                        <a asp-page="LogIn">Sign In</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <script type="text/javascript">function changePasswordView() {
+                if (document.getElementById("passwordBox").getAttribute("type") == "password")
+                    document.getElementById("passwordBox").setAttribute("type", "text")
+                else
+                    document.getElementById("passwordBox").setAttribute("type", "password")
+            }</script>
+    </div>
+</body>
+</html>

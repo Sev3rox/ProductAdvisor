@@ -1,0 +1,118 @@
+﻿@page
+@model webapp.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Lista produktów</h1>
+
+    <p>
+        <div class="row">
+            <div class="col">
+                <a asp-page="Create">Dodaj nowy produkt</a>
+            </div>
+
+        </div>
+    </p>
+
+    <form method="get">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    Wyszukiwanie
+                </div>
+                <div class="col">
+                    Sortowanie
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group-append">
+                        <input class="form-control" asp-for="SearchTerm" />
+                        <button type="submit" class="btn btn-primary">Szukaj</button>
+                    </div>
+                </div>
+                <div class="col">
+                    <select onchange={this.form.submit()} class="form-control custom-select " asp-for="SelectedTags">
+                        <option value="">Od Najnowszych</option>
+                        <option value="1">Od Najstarszych</option>
+                        <option value="2">Po Cenie Malejąco</option>
+                        <option value="3">Po Cenie Rosnąco</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product[0].Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product[0].Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product[0].Description)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Product[0].Company)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.catsss)
+            {
+                <tr>
+                    <td>
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" width="80" height="80" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Company.Name)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edycja</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Szczegóły</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Usuń</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

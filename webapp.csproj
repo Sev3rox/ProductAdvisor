@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ML" Version="1.5.5" />
+    <PackageReference Include="Microsoft.ML.Recommender" Version="0.17.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\Głosowaniee\Index - Copy %282%29 - Copy %282%29.cshtml.cs">
+      <DependentUpon>Index - Copy (2).cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy %282%29 - Copy - Copy.cshtml.cs">
+      <DependentUpon>Index - Copy (2) - Copy.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy %282%29 - Copy.cshtml.cs">
+      <DependentUpon>Index - Copy (2).cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy %282%29.cshtml.cs">
+      <DependentUpon>Index.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy %283%29 - Copy.cshtml.cs">
+      <DependentUpon>Index - Copy (3).cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy %283%29.cshtml.cs">
+      <DependentUpon>Index.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy %284%29.cshtml.cs">
+      <DependentUpon>Index.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy - Copy %282%29 - Copy.cshtml.cs">
+      <DependentUpon>Index - Copy - Copy (2).cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy - Copy %282%29.cshtml.cs">
+      <DependentUpon>Index - Copy.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy - Copy %283%29.cshtml.cs">
+      <DependentUpon>Index - Copy.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy - Copy - Copy %282%29.cshtml.cs">
+      <DependentUpon>Index - Copy - Copy.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy - Copy - Copy - Copy.cshtml.cs">
+      <DependentUpon>Index - Copy - Copy - Copy.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy - Copy - Copy.cshtml.cs">
+      <DependentUpon>Index - Copy - Copy.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy - Copy.cshtml.cs">
+      <DependentUpon>Index - Copy.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Głosowaniee\Index - Copy.cshtml.cs">
+      <DependentUpon>Index.cshtml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\KalendarzPremier\Index - kopiować.cshtml.cs">
+      <DependentUpon>Index.cshtml.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

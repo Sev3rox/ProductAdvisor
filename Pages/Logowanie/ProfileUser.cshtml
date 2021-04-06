@@ -1,0 +1,60 @@
+﻿@page
+@model webapp.Pages.ProfileUserModel
+@{ ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutUser.cshtml"; }
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profile</title>
+</head>
+<body>
+    <style>
+        body {
+            background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+
+    <div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+        <h3>Profile</h3>
+        <form method="post" asp-page="profile">
+            <table>
+                <tr>
+                    <td>Username</td>
+                    <td>
+                        <input asp-for="@Model.account.Username" />
+                        <input type="hidden" asp-for="@Model.account.Id" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>
+                        <input type="password" asp-for="@Model.account.Password" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>
+                        <input type="email" asp-for="@Model.account.Email" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <input type="submit" value="Save" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

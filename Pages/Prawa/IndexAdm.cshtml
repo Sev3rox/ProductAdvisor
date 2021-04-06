@@ -1,0 +1,77 @@
+﻿@page
+@model webapp.Pages.Prawa.IndexAdmModel
+
+@{ ViewData["Title"] = "Obsługa rezerwacji";
+                Layout = "../Shared/_LayoutWorker.cshtml"; }
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+    <h1>Użytkownicy</h1>
+
+    <p>
+        <a asp-page="Pracownicy">Pracownicy    </a>  |
+        <a asp-page="Zbanowani">Zbanowani    </a>  |
+        <a asp-page="Wyróżnieni">Wyróżnieni    </a>  |
+        <a asp-page="Z_zakazem_komentowania">Z zakazem komentowania    </a>
+
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account[0].Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account[0].Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account[0].role)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Account[0].role2)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Account)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Username)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.role)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.role2)
+    </td>
+    <td>
+        <a asp-page="./PracChange" asp-route-id="@item.Id">Dodaj Pracownika  </a> |
+        <a asp-page="./BanChange" asp-route-id="@item.Id">Zbanuj  </a> |
+        <a asp-page="./Wyróżnij" asp-route-id="@item.Id">Wyróżnij  </a> |
+        <a asp-page="./Zakaż" asp-route-id="@item.Id">Zablokuj komentowanie  </a>
+        <a asp-page="./Details" asp-route-id="@item.Id">Szczegóły  </a>
+    </td>
+</tr>            }
+        </tbody>
+    </table>
+</div>

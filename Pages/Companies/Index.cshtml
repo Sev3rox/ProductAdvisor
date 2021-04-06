@@ -1,0 +1,92 @@
+﻿@page
+@model webapp.Pages.Companies.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+    <form method="get">
+        <div class="col">
+            <div class="input-group-append">
+                <input class="form-control" asp-for="SearchTerm" />
+                <button type="submit" class="btn btn-primary">Szukaj</button>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.catsss[0].Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.catsss[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.catsss[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.catsss[0].Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.catsss[0].Location)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model.catsss)
+            {
+                <tr>
+                    <td>
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" width="80" height="80" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a> |
+                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,74 @@
+﻿@page
+@model webapp.Pages.ReviewsProduct.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Edit</h1>
+
+    <h4>ReviewProduct</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ReviewProduct.ID" />
+                <div class="form-group">
+                    <label asp-for="ReviewProduct.komentarz" class="control-label"></label>
+                    <input asp-for="ReviewProduct.komentarz" class="form-control" />
+                    <span asp-validation-for="ReviewProduct.komentarz" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReviewProduct.data" class="control-label"></label>
+                    <input asp-for="ReviewProduct.data" class="form-control" />
+                    <span asp-validation-for="ReviewProduct.data" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReviewProduct.userr" class="control-label"></label>
+                    <input asp-for="ReviewProduct.userr" class="form-control" />
+                    <span asp-validation-for="ReviewProduct.userr" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReviewProduct.Number" class="control-label"></label>
+                    <input asp-for="ReviewProduct.Number" class="form-control" />
+                    <span asp-validation-for="ReviewProduct.Number" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReviewProduct.ProductID" class="control-label"></label>
+                    <input asp-for="ReviewProduct.ProductID" class="form-control" />
+                    <span asp-validation-for="ReviewProduct.ProductID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</div>

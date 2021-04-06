@@ -1,0 +1,58 @@
+﻿@page
+@model webapp.Pages.KalendarzPremier.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "../Shared/_LayoutWorker.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Product.Id" />
+            <div class="form-group">
+                <img src="data:image;base64,@System.Convert.ToBase64String(Model.Product.Image)" width="80" height="80" />
+                <input type="file" value="app.jpg" asp-for="Upload" class="form-control" accept="image/jpeg,image/jpg,image/png" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <input asp-for="Product.Description" class="form-control" />
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.CompanyID" class="control-label"></label>
+                <select asp-for="Product.CompanyID" class="form-control" asp-items="ViewBag.CompanyID"></select>
+                <span asp-validation-for="Product.CompanyID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Premiera" class="control-label"></label>
+                <input asp-for="Product.Premiera" class="form-control" />
+                <span asp-validation-for="Product.Premiera" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>$.validator.methods.number = function (value, element) {
+        return this.optional(element) || /^\d*\,?\d*$/.test(value);
+    }</script>
+}

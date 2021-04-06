@@ -1,0 +1,38 @@
+﻿@page
+@model webapp.Pages.WelcomeModel
+@{ ViewData["Title"] = "Obsługa rezerwacji";
+    Layout = "../Shared/_LayoutWorker.cshtml"; }
+@using Microsoft.AspNetCore.Http
+
+
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignUp</title>
+</head>
+<body style="background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
+    <div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px; ">
+
+        Welcome @HttpContext.Session.GetString("username")
+        <br />
+        Id: @Model.account.Id
+        <br />
+        Email:  @Model.account.Email
+        <br />
+        Rola: @Model.account.role
+        <br />
+        <a asp-page="/Index" asp-page-handler="logout">Logout</a>
+        <a asp-page="Profile">Change Profile</a>
+    </div>
+</body>
+</html>
+

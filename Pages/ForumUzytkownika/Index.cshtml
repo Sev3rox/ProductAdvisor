@@ -1,0 +1,73 @@
+﻿@page
+@model webapp.Pages.ForumUzytkownika.IndexModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "../Shared/_LayoutUser.cshtml";
+}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Forum[0].name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Forum[0].tresc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Forum[0].data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Forum[0].userr)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Forum)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tresc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.userr)
+                    </td>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.ID">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
