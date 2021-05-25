@@ -28,9 +28,10 @@ namespace webapp.Pages.ProGlos
                 return RedirectToPage("../Common/NoAccessNotLoged");
             if (accountt.role == 0)
                 return RedirectToPage("../Common/NoAccessUser");
-
-            ViewData["GlosowanieId"] = new SelectList(_context.Głosowanie, "Id", "Id");
-        ViewData["ProductId"] = new SelectList(_context.Product, "Id", "Description");
+            var temp1= new SelectList(_context.Głosowanie, "Id", "Id");
+            ViewData["GlosowanieId"] = temp1;
+            var temp2 = new SelectList(_context.Product, "Id", "Description");
+            ViewData["ProductId"] = temp2;
             return Page();
         }
 
@@ -46,6 +47,8 @@ namespace webapp.Pages.ProGlos
                 return Page();
             }
 
+            ProductGlosowanie pg = _context.ProductGlosowanie.SingleOrDefault(b => (b.GlosowanieId == ProductGlosowanie.GlosowanieId && b.ProductId == ProductGlosowanie.ProductId));
+            if(pg==null)
             _context.ProductGlosowanie.Add(ProductGlosowanie);
             await _context.SaveChangesAsync();
 

@@ -31,6 +31,10 @@ namespace webapp.Pages.Companies
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            var usernamee = HttpContext.Session.GetString("username");
+            var accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
+            if (accountt == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
             ICompany = await _context.Company.ToListAsync();
             Company = await _context.Company.FirstOrDefaultAsync(m => m.ID == id);
             var listt = _context.Company;

@@ -56,46 +56,74 @@
             </dd>
         </dl>
     </div>
-    <h4>Komentarze</h4>
-    <hr />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.comment.komentarz)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.comment.data)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.comment.userr)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="container">
+        <h4>Komentarze (@Model.Forum.Comments.Count)</h4>
+        <div class="row">
             @foreach (var item in Model.Forum.Comments)
             {
-        @if (item.hidden == false)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.komentarz)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.data)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.userr)
-                </td>
-            </tr>
-        }
-
-    }
-        </tbody>
-    </table>
+                <div class="col-md-8">
+                    <div class="media g-mb-30 media-comment">
+                        <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                            <div class="g-mb-15">
+                                <h5 class="h5 g-color-gray-dark-v1 mb-0">
+                                    @Html.DisplayFor(modelItem => item.Account1.Username)
+                                </h5>
+                                <span class="g-color-gray-dark-v4 g-font-size-12">@item.data</span>
+                            </div>
+                            <p>
+                                @item.komentarz
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
     <div>
-        <a asp-page="/CommentsUzytkownika/Create" asp-route-id="@Model.Forum.ID">Dodaj komentarz</a> |
-        <a asp-page="./Index">Back to List</a>
+        @if (Model.accountt.role2 != 2)
+        {
+            <a asp-page="/CommentsUzytkownika/Create" asp-route-id="@Model.Forum.ID">Dodaj komentarz</a> 
+        }
+       | <a asp-page="./Index">Back to List</a>
     </div>
 </div>
+<style>
+
+
+
+.g-height-50 {
+    height: 50px;
+}
+
+.g-width-50 {
+    width: 50px !important;
+}
+
+    #div1 {
+        display: inline-block;
+    }
+
+    #div2 {
+        display: inline-block;
+    }
+.g-bg-secondary {
+    background-color: #fafafa !important;
+}
+
+.u-shadow-v18 {
+    box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+}
+
+.g-color-gray-dark-v4 {
+    color: #777 !important;
+}
+
+.g-font-size-12 {
+    font-size: 0.85714rem !important;
+}
+
+.media-comment {
+    margin-top:20px
+}
+</style>

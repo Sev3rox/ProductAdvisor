@@ -19,6 +19,10 @@ namespace webapp.Pages
 
         private ShopContext db;
         public List<Decorations> cats;
+        static string uss;
+        static string maill;
+        public string Msg;
+        public static Account acuu;
         public ProfileUserModel(ShopContext _db)
         {
             db = _db;
@@ -36,12 +40,14 @@ namespace webapp.Pages
 
 
 
-
-
-
-
-
+            acuu = account;
+            uss = account.Username;
+            maill = account.Email;
             return Page();
+
+
+
+          
         }
 
         public IActionResult OnPost()
@@ -55,12 +61,49 @@ namespace webapp.Pages
             {
                 account.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
             }
-            db.SaveChanges();
-            db.Entry(account).State = EntityState.Modified;
-            db.SaveChanges();
-            HttpContext.Session.SetString("username", account.Username);
-            return RedirectToPage("WelcomeUser");
+            var acc = login(account.Username);
+            var mail = logine(account.Email);
+            if ((acc == null || uss == account.Username) && (mail == null || maill == account.Email))
+            {
+
+                var ac = acuu;
+                ac.Email = account.Email;
+                ac.Password = account.Password;
+                ac.Username = account.Username;
+                db.SaveChanges();
+                db.Entry(ac).State = EntityState.Modified;
+                db.SaveChanges();
+                HttpContext.Session.SetString("username", account.Username);
+                return RedirectToPage("WelcomeUser");
+
+            }
+            else
+            {
+                if (acc != null && uss != account.Username)
+                    Msg = Msg + "Ten username jest juz zarejestrowany \n";
+                if (mail != null && maill != account.Email)
+                    Msg = Msg + "Ten email jest ju¿ zarejestrowany";
+                return Page();
+            }
+        }
+        private Account login(string username)
+        {
+            var accountt = db.Accounts.AsNoTracking().SingleOrDefault(a => a.Username.Equals(username));
+            if (accountt != null)
+            {
+                return accountt;
+            }
+            return null;
         }
 
+        private Account logine(string email)
+        {
+            var accountt = db.Accounts.AsNoTracking().SingleOrDefault(a => a.Email.Equals(email));
+            if (accountt != null)
+            {
+                return accountt;
+            }
+            return null;
+        }
     }
 }

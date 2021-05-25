@@ -26,6 +26,7 @@ namespace webapp.Pages.Products
         public double srednia { get; set; }
         public string xyz = null;
         public List<ReviewProduct> Recenzje { get; set; }
+        public bool pom { get; set; }
         public List<CommentReview> comrecenzje1 { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id, string f)
@@ -34,6 +35,8 @@ namespace webapp.Pages.Products
                 xyz = "22";
             if (f == "main")
                 xyz = "11";
+            if (f == "forum")
+                xyz = "33";
             var usernamee = HttpContext.Session.GetString("username");
             var accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
             if (accountt == null)
@@ -60,7 +63,11 @@ namespace webapp.Pages.Products
 
             var reviewProduct = _context.ReviewProduct.Where(i => i.ProductID == id).Include(p => p.CommentsReview);
             Recenzje = new List<ReviewProduct>(reviewProduct);
-
+            pom = false;
+            if(Recenzje.Where(z=>z.userr== usernamee).ToList().Count>0)
+            {
+                pom = true;
+            }
             iddd = Product.Id;
             if (Product.quantity != 0)
             { srednia = Product.opinion / Product.quantity; }

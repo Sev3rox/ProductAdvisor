@@ -1,7 +1,7 @@
 ﻿@page
 @model webapp.Pages.Companies.IndexUserModel
 
-@{ ViewData["Title"] = "Obsługa rezerwacji";
+@{ ViewData["Title"] = "Companies";
                 Layout = "../Shared/_LayoutUser.cshtml"; }
 <style>
     body {
@@ -45,12 +45,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.catsss[0].Description)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.catsss[0].Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.catsss[0].Location)
-                </th>
                 <th></th>
             </tr>
         </thead>
@@ -70,13 +64,7 @@
         @Html.DisplayFor(modelItem => item.Description)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Date)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Location)
-    </td>
-    <td>
-        <a asp-page="./DetailsNotLoged" asp-route-id="@item.ID">Details</a> |
+        <a asp-page="./DetailsUser" asp-route-id="@item.ID">Details</a> |
         <a asp-page="./Block" asp-route-id="@item.ID">Block</a>
     </td>
 </tr>            }

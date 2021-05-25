@@ -23,7 +23,13 @@ namespace webapp.Pages.KalendarzPremier
 
         public IActionResult OnGet()
         {
-        ViewData["CompanyID"] = new SelectList(_context.Company, "ID", "Description");
+            var usernamee = HttpContext.Session.GetString("username");
+            var accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
+            if (accountt == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+            if (accountt.role == 0)
+                return RedirectToPage("../Common/NoAccessUser");
+            ViewData["CompanyID"] = new SelectList(_context.Company, "ID", "Description");
             return Page();
         }
 

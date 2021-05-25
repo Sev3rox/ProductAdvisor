@@ -9,7 +9,7 @@
         has = elem.Contains(Model.Product.Id.ToString());
     } }
 @{
-    ViewData["Title"] = "Obsługa rezerwacji";
+    ViewData["Title"] = "Product";
     Layout = "../Shared/_LayoutWorker.cshtml";
 }
 <head>
@@ -35,30 +35,21 @@
         padding: 10px;
 ">
 
-    @if (Model.pomstr == "xyz")
+    @if (Model.xyz == "11")
     {
-<div>
-    <a asp-page="../Common/MainWorker">Back to List</a>
-</div> }
-else
-{
-<a asp-page="./Index">Back to List</a>}
+    <div>
+        <a asp-page="../Common/MainWorker">Back to List</a>
+    </div> }
+    else
+    {
+    <a asp-page="./Index">Back to List</a>
+    }
     <h1>Details</h1>
 
     <div>
         <div class="row">
             <div class="col">
                 <h4>Product</h4>
-            </div>
-            @if (has == false)
-            {
-    <div class="col">
-        <form method="post" enctype="multipart/form-data">
-            <input type="submit" name="submitButton" value="Dodaj do porównania" input />
-        </form>
-    </div>}
-            <div class="col">
-                <a asp-area="" asp-page="/Products/CompareProducts">Porównaj wybrane produkty</a>
             </div>
 
         </div>
@@ -103,9 +94,7 @@ else
                     <div class="col">
                         @Html.DisplayFor(model => model.Product.Description)
                     </div>
-                    <div class="col">
-                        <a asp-page="/ProductsDescription/Create" asp-route-id="@Model.Product.Id">Popraw/dodaj opis</a>
-                    </div>
+
                 </div>
             </dd>
             <dt class="col-sm-2">
@@ -139,88 +128,159 @@ else
 
         </form>
 
-        <h4> Recenzje: @Model.Recenzje.Count</h4>
-        <hr />
-        <table class="table">
-
-
-            @foreach (var item in Model.Recenzje)
-            {
-    <tbody style="        background-color: #FFFF99">
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.Recenzje[0].userr)&nbsp;
-                @Html.DisplayFor(modelItem => item.userr)
-            </td>
-            <td>
-                @Html.DisplayNameFor(model => model.Recenzje[0].data)&nbsp;
-                @Html.DisplayFor(modelItem => item.data)
-            </td>
-            <td>
-                <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@item.userr" asp-route-xpom="rec" asp-route-pid="@item.ProductID">Profil użytkownika</a>
-            </td>
-            <td>
-                @for (int i = 0; i < item.Number; i++)
-                {
-    <span class="fa fa-star checked"></span>}
-                @for (int i = 0; i < 5 - item.Number; i++)
-                {
-    <span class="fa fa-star"></span>}
-            </td>
-            <td>
-
-                @Html.DisplayFor(modelItem => item.komentarz)
-            </td>
-
-
-        </tr>
-    </tbody>
+        <div class="container bootstrap snippets bootdey">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="blog-comment">
+                        <h3 class="text-success">Recenzje ( @Model.Recenzje.Count)</h3>
+                        <hr />
+                        @foreach (var item in Model.Recenzje)
+                        {
+            <ul class="comments">
+                <li class="clearfix">
+                    <div class="post-comments">
+                        <p class="meta">
+                            @Html.DisplayFor(modelItem => item.data) <a href="#">@Html.DisplayFor(modelItem => item.userr)</a>
+                            <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@item.userr" asp-route-xpom="rec" asp-route-pid="@item.ProductID">Profil użytkownika</a> give :
+                            @for (int i = 0; i < item.Number; i++)
+                            {<span class="fa fa-star checked"></span>}
+                            @for (int i = 0; i < 5 - item.Number; i++)
+                            {<span class="fa fa-star"></span>}
+                        </p>
+                        <p>
+                            @Html.DisplayFor(modelItem => item.komentarz)
+                        </p>
+                    </div>
                     @if (item.CommentsReview.Count != 0)
                     {
-    <tr><th></th><th><h9> Komentarze:</h9></th></tr>
-                        <tbody>
-                            @for (int i = 0; i < item.CommentsReview.Count; i++)
-                            {
-                                Model.comrecenzje1 = item.CommentsReview.ToList();
-        <tr>
-            <td></td>
-            <td style="        background-color: #FFFFCC">
-                @Html.DisplayNameFor(model => model.comrecenzje1[0].userr)&nbsp;
-                @Html.DisplayFor(modelItem => Model.comrecenzje1[i].userr)
-            </td>
-            <td style="        background-color: #FFFFCC">
-                @Html.DisplayNameFor(model => model.comrecenzje1[0].data)&nbsp;
-                @Html.DisplayFor(modelItem => Model.comrecenzje1[i].data)
-            </td>
-            <td style="        background-color: #FFFFCC">
-                @Html.DisplayFor(modelItem => Model.comrecenzje1[i].komentarz)
-            </td>
-            <td>
-                <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@Model.comrecenzje1[i].userr" asp-route-xpom="rec" asp-route-pid="@item.ProductID">Profil użytkownika</a>
-            </td>
+    @for (int i = 0; i < item.CommentsReview.Count; i++)
+    {
+        Model.comrecenzje1 = item.CommentsReview.ToList();
+    <ul class="comments">
+        <li class="clearfix">
+            <div class="post-comments">
+                <p class="meta">@Html.DisplayFor(modelItem => Model.comrecenzje1[i].data) <a href="#"> @Html.DisplayFor(modelItem => Model.comrecenzje1[i].userr)</a> <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@Model.comrecenzje1[i].userr" asp-route-xpom="rec" asp-route-pid="@item.ProductID">Profil użytkownika</a></p>
+                <p>
+                    @Html.DisplayFor(modelItem => Model.comrecenzje1[i].komentarz)
+                </p>
+            </div>
+        </li>
+    </ul>}}
+                </li>
 
-        </tr>
-}
+            </ul>}
 
-                        </tbody>
-                                            <tr><th></th></tr>
-}}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        </table>
-
-
-        @if (Model.pomstr == "xyz")
+        @if (Model.xyz == "11")
         {
-    <div>
-        <a asp-page="../Common/MainWorker">Back to List</a>
-    </div> }
-else
-{
-    <a asp-page="./Index">Back to List</a>}
+        <div>
+            <a asp-page="../Common/MainWorker">Back to List</a>
+        </div> }
+        else
+        {
+        <a asp-page="./Index">Back to List</a>
+        }
         <style>
             .checked {
                 color: orange;
             }
+
+            hr {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                border: 0;
+                border-top: 1px solid #FFFFFF;
+            }
+
+            a {
+                color: #82b440;
+                text-decoration: none;
+            }
+
+            .blog-comment::before,
+            .blog-comment::after,
+            .blog-comment-form::before,
+            .blog-comment-form::after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            .blog-comment {
+                padding-left: 15%;
+                padding-right: 15%;
+            }
+
+                .blog-comment ul {
+                    list-style-type: none;
+                    padding: 0;
+                }
+
+                .blog-comment img {
+                    opacity: 1;
+                    filter: Alpha(opacity=100);
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    -o-border-radius: 4px;
+                    border-radius: 4px;
+                }
+
+                    .blog-comment img.avatar {
+                        position: relative;
+                        float: left;
+                        margin-left: 0;
+                        margin-top: 0;
+                        width: 65px;
+                        height: 65px;
+                    }
+
+                .blog-comment .post-comments {
+                    border: 1px solid #eee;
+                    margin-bottom: 20px;
+                    margin-left: 85px;
+                    margin-right: 0px;
+                    padding: 10px 20px;
+                    position: relative;
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    -o-border-radius: 4px;
+                    border-radius: 4px;
+                    background: #fff;
+                    color: #6b6e80;
+                    position: relative;
+                }
+
+                .blog-comment .meta {
+                    font-size: 13px;
+                    color: #aaaaaa;
+                    padding-bottom: 8px;
+                    margin-bottom: 10px !important;
+                    border-bottom: 1px solid #eee;
+                }
+
+                .blog-comment ul.comments ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin-left: 85px;
+                }
+
+            .blog-comment-form {
+                padding-left: 15%;
+                padding-right: 15%;
+                padding-top: 40px;
+            }
+
+                .blog-comment h3,
+                .blog-comment-form h3 {
+                    margin-bottom: 40px;
+                    font-size: 26px;
+                    line-height: 30px;
+                    font-weight: 800;
+                }
         </style>
     </div>
 </div>

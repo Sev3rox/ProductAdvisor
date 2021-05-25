@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using webapp.Data;
 using webapp.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace webapp.Pages.KalendarzPremier
 {
@@ -21,9 +22,16 @@ namespace webapp.Pages.KalendarzPremier
 
         [BindProperty]
         public Product Product { get; set; }
+        public Account account { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            var username = HttpContext.Session.GetString("username");
+            account = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+            if (account == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+            if (account.role == 0)
+                return RedirectToPage("../Common/NoAccessUser");
             if (id == null)
             {
                 return NotFound();

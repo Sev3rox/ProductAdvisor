@@ -1,10 +1,26 @@
 ﻿@page
 @model webapp.Pages.StronaGłosowania.GlosModel
-@{
-    ViewData["Title"] = "Obsługa rezerwacji";
-    Layout = "../Shared/_LayoutUser.cshtml";
-}
-<form method="post">
-    <h1>Zagłosowano</h1>
-    <a asp-page="./Index">Wróć do listy</a>
-</form>
+@{ ViewData["Title"] = "Voted";
+                Layout = "../Shared/_LayoutUser.cshtml"; }
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+    <form method="post">
+        <h1>Zagłosowano</h1>
+        <a asp-page="./Index">Wróć do listy</a>
+    </form>

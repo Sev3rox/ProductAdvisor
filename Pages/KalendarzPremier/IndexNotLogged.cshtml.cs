@@ -35,13 +35,24 @@ namespace webapp.Pages.KalendarzPremier
         public IList<Product> catssss;
         public List<Product_Category> pclist;
         public List<Product> cats;
-       
-        public async Task OnGetAsync()
+
+        public Account account { get; set; }
+        public async Task<IActionResult> OnGetAsync()
         {
+            var username = HttpContext.Session.GetString("username");
+
+            account = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+            if (account != null)
+            {
+                if (account.role != 0)
+                    return RedirectToPage("../Common/NoAccessWorker");
+                if (account.role == 0)
+                    return RedirectToPage("../Common/NoAccessUser");
+            }
 
             Product = await _context.Product
                 .Include(p => p.Company).ToListAsync();
-            catss = await _context.Product.ToListAsync();
+            catss = _context.Product.ToList();
            
             
             catsss = catss;
@@ -81,8 +92,7 @@ namespace webapp.Pages.KalendarzPremier
             }
 
             catsss = catsss.OrderBy(s => s.Premiera).ToList();
-
-
+            return Page();
         }
     }
 }

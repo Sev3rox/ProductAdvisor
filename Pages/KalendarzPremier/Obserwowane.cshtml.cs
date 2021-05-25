@@ -31,15 +31,19 @@ namespace webapp.Pages.KalendarzPremier
             public IList<Product> catsss;
             public List<Product> cats;
             public Account account { get; set; }
-            public async Task OnGetAsync()
-            {
+        public async Task<IActionResult> OnGetAsync()
+        {
 
-                Product = await _context.Product
+            Product = await _context.Product
                     .Include(p => p.Company).ToListAsync();
                 catss = await _context.Product.ToListAsync();
                 var username = HttpContext.Session.GetString("username");
                 account = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
-                var companys = _context.Company.Where(item => item.BlockedBy.Any(j => j.AccountId == account.Id));
+            if (account == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+            if (account.role == 1)
+                return RedirectToPage("../Common/NoAccessAdmin");
+            var companys = _context.Company.Where(item => item.BlockedBy.Any(j => j.AccountId == account.Id));
                 cats = _context.Product.Where(item => item.UlubioneBy.Any(j => j.AccountId == account.Id)).ToList();
                 foreach (Product x in cats)
                 {
@@ -70,7 +74,7 @@ namespace webapp.Pages.KalendarzPremier
                         Product = Product.OrderByDescending(s => s.Id).ToList();
                         break;
                 }
-
+            return Page();
             }
         }
 }

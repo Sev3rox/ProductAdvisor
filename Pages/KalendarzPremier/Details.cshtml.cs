@@ -20,10 +20,16 @@ namespace webapp.Pages.KalendarzPremier
         {
             _context = context;
         }
-
+        public Account account { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            var username = HttpContext.Session.GetString("username");
 
+            account = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+            if (account == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+            if (account.role == 0)
+                return RedirectToPage("../Common/NoAccessUser");
             var listt = _context.Category;
             List<Category> catss = new List<Category>(listt);
             var categories = _context.Category.Where(item => item.Products.Any(j => j.ProductId == id));

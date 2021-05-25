@@ -2,7 +2,7 @@
 @model webapp.Pages.Products.UlubioneModel
 
 @{
-    ViewData["Title"] = "Obsługa rezerwacji";
+    ViewData["Title"] = "Liked";
     Layout = "../Shared/_LayoutUser.cshtml";
 }
 
@@ -97,7 +97,7 @@
                     </td>
                     <td>
                         <a asp-page="./DetailsUser" asp-route-id="@item.Id" asp-route-f="ulub">Szczegóły</a> |
-                        <a asp-page="./OdUlub" asp-route-id="@item.Id">Usuń</a>|
+                        <a asp-page="./OdUlub" asp-route-id="@item.Id">Usuń</a>
                     </td>
                 </tr>
             }

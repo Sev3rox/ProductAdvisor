@@ -39,7 +39,7 @@ namespace webapp.Pages.CommentsUzytkownika
                 return NotFound();
             }
 
-            Comment = await _context.Commment
+            Comment = await _context.Commment.Include(z => z.Account1)
                 .Include(c => c.Forum).FirstOrDefaultAsync(m => m.ID == id);
 
             if (Comment == null)

@@ -32,9 +32,12 @@ namespace webapp.Pages.Products
         public IList<Product> catsss;
         public List<Product> cats;
         public Account account { get; set; }
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-
+            var usernamee = HttpContext.Session.GetString("username");
+            var accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
+            if (accountt == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
             Product = await _context.Product
                 .Include(p => p.Company).ToListAsync();
             catss = await _context.Product.ToListAsync();
@@ -70,7 +73,7 @@ namespace webapp.Pages.Products
                     Product = Product.OrderByDescending(s => s.Id).ToList();
                     break;
             }
-            
+            return Page();
         }
     }
 }

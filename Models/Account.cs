@@ -27,5 +27,9 @@ namespace webapp.Models
 
         public ICollection<Ulubione> Ulubiones { get; set; }
         public ICollection<AccountGlosowanie> AccountGlosowanies { get; set; }
+        public static implicit operator string(Account v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

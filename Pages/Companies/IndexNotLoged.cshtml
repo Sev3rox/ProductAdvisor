@@ -1,7 +1,7 @@
 ﻿@page
 @model webapp.Pages.Companies.IndexNotLogedModel
 
-@{ ViewData["Title"] = "Obsługa rezerwacji";
+@{ ViewData["Title"] = "Companies";
                 Layout = "../Shared/_LayoutNotLoged.cshtml"; }
 <style>
     body {
@@ -43,12 +43,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.catsss[0].Description)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.catsss[0].Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.catsss[0].Location)
-                </th>
                 <th></th>
             </tr>
         </thead>
@@ -66,12 +60,6 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Date)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Location)
     </td>
     <td>
 

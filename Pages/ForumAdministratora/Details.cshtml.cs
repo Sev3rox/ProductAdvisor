@@ -27,6 +27,8 @@ namespace webapp.Pages.ForumAdministratora
         public int z { get; set; }
         [BindProperty]
         public Account uzytkownik { get; set; }
+        [BindProperty]
+        public List<Comment> comments { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             var usernamee = HttpContext.Session.GetString("username");
@@ -42,6 +44,7 @@ namespace webapp.Pages.ForumAdministratora
             }
             
             Forum = await _context.Forum.Include(p => p.Comments).ThenInclude(x => x.Forum).FirstOrDefaultAsync(m => m.ID == id);
+            comments =  _context.Commment.Include(p => p.Account1).Where(x => x.ForumID == id).ToList();
             Recenzje =  _context.Commment.Where(z => z.Forum.ID== id).ToList();
 
             if (Forum == null)

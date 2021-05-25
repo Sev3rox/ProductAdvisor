@@ -37,6 +37,10 @@ namespace webapp.Pages.KalendarzPremier
             catss = new List<Product>(listt);
             var username = HttpContext.Session.GetString("username");
             account = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+            if (account == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+            if (account.role != 0)
+                return RedirectToPage("../Common/NoAccessWorker");
             var products = _context.Product.Where(item => item.UlubioneBy.Any(j => j.AccountId == id));
             cats = new List<Product>(products);
             foreach (Product x in cats)
@@ -56,7 +60,7 @@ namespace webapp.Pages.KalendarzPremier
 
             _context.Ulubione.Add(procat);
             await _context.SaveChangesAsync();
-            return RedirectToPage("./Index");
+            return RedirectToPage("./IndexUser");
         }
     }
 }

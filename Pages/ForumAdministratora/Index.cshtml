@@ -66,8 +66,8 @@
                     <td>
                         <a asp-page="./Edit" asp-route-id="@Model.ForumTitled[i].ID">Edit</a> |
                         <a asp-page="./Details" asp-route-id="@Model.ForumTitled[i].ID">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@Model.ForumTitled[i].ID">Delete</a> |
-                        <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@Model.Forum[i].userr" asp-route-xpom="post">Profil użytkownika</a>
+                        <a asp-page="./Delete" asp-route-id="@Model.ForumTitled[i].ID">Delete</a> 
+                       
                         <form method="post" enctype="multipart/form-data">
                             <input type="hidden" asp-for="z" value="@Model.ForumTitled[i].ID" />
                             <input type="submit" name="submitButton" value="odWyroznij" />
@@ -94,7 +94,7 @@
                         <a asp-page="./Edit" asp-route-id="@Model.Forum[i].ID">Edit</a> |
                         <a asp-page="./Details" asp-route-id="@Model.Forum[i].ID">Details</a> |
                         <a asp-page="./Delete" asp-route-id="@Model.Forum[i].ID">Delete</a> |
-                        <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@Model.Forum[i].userr" asp-route-xpom="post">Profil użytkownika</a>
+                        
                         <form method="post" enctype="multipart/form-data">
                             <input type="hidden" asp-for="z" value="@Model.Forum[i].ID" />
                             <input type="submit" name="submitButton" value="Wyroznij" />

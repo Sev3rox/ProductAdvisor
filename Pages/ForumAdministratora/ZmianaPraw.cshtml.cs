@@ -20,11 +20,12 @@ namespace webapp.Pages.ForumAdministratora
         }
         [BindProperty]
         public Account Account { get; set; }
-        public async Task<IActionResult> OnGetAsync(int? idForum, int? idUser, string idRole)
+        public async Task<IActionResult> OnGetAsync(int? idForum, string idUser, string idRole)
         {
+            string u = idUser;
+            Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Username == u);
             if (idRole == "odblokujKomentowanie" || idRole == "zablokujKomentowanie")
             {
-                Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Id == idUser);
                 int pom = Account.role2;
                 if (Account.role2 == 2)
                     Account.role2 = 0;
@@ -34,7 +35,7 @@ namespace webapp.Pages.ForumAdministratora
             }
             else if (idRole == "zbanuj" || idRole == "odbanuj")
             {
-                Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Id == idUser);
+
                 if (Account.role == 0)
                 {
 
@@ -47,7 +48,7 @@ namespace webapp.Pages.ForumAdministratora
             }
             else if (idRole == "wyroznij" || idRole == "cofnijWyroznienie")
             {
-                Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Id == idUser);
+                Account = await _context.Accounts.FirstOrDefaultAsync(m => m.Username == u);
                 int pom = Account.role2;
                 if (pom == 0 || pom == 2)
                     Account.role2 = 1;

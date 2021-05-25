@@ -22,6 +22,8 @@ namespace webapp.Pages.ForumUzytkownika
 
         public IList<Forum> ForumTitled { get;set; }
         public IList<Forum> Forum { get; set; }
+        [BindProperty]
+        public List<Product> Products { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -29,7 +31,7 @@ namespace webapp.Pages.ForumUzytkownika
             var accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
             if (accountt == null)
                 return RedirectToPage("../Common/NoAccessNotLoged");
-
+            Products = _context.Product.Where(z => z.forAdvertising == true).ToList();
             Forum = await _context.Forum.Where(z=>z.titled==false).ToListAsync();
             ForumTitled = await _context.Forum.Where(z => z.titled == true).ToListAsync();
             return Page();

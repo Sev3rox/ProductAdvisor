@@ -36,7 +36,7 @@ namespace webapp.Pages.KalendarzPremier
         public List<Product_Category> pclist;
         public List<Product> cats;
         public Account account { get; set; }
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
 
             Product = await _context.Product
@@ -44,6 +44,10 @@ namespace webapp.Pages.KalendarzPremier
             catss = await _context.Product.ToListAsync();
             var username = HttpContext.Session.GetString("username");
             account = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+            if (account == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+            if (account.role != 0)
+                return RedirectToPage("../Common/NoAccessWorker");
             var companys = _context.Company.Where(item => item.BlockedBy.Any(j => j.AccountId == account.Id));
             cats = _context.Product.Where(item => item.UlubioneBy.Any(j => j.AccountId == account.Id)).ToList();
             foreach (Product x in cats)
@@ -90,7 +94,7 @@ namespace webapp.Pages.KalendarzPremier
 
             catsss = catsss.OrderBy(s => s.Premiera).ToList();
 
-
+            return Page();
         }
     }
 }

@@ -24,8 +24,13 @@ namespace webapp.Pages.Common
         {
             _context = context;
         }
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var usernameee = HttpContext.Session.GetString("username");
+            var accountttt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernameee));
+            if (accountttt == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+          
             Product = new List<Product>();
             var username = HttpContext.Session.GetString("username");
             var accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
@@ -117,7 +122,7 @@ namespace webapp.Pages.Common
                 }
 
             }
-            var xx = 7;
+            return Page();
         }
         /*public void recomentadion()
         {

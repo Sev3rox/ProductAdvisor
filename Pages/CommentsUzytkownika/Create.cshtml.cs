@@ -23,12 +23,14 @@ namespace webapp.Pages.CommentsUzytkownika
 
         [BindProperty]
         public Forum Forum { get; set; }
+        [BindProperty]
+        public Account accountt { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
 
             var usernamee = HttpContext.Session.GetString("username");
-            var accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
+            accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
             if (accountt == null)
                 return RedirectToPage("../Common/NoAccessNotLoged");
             if (id == null)
@@ -57,16 +59,16 @@ namespace webapp.Pages.CommentsUzytkownika
                 return Page();
             }
             Comment.ForumID = Forum.ID;
-            Comment.data = DateTime.Now;
-            Comment.userr = HttpContext.Session.GetString("username");
-            if (Comment.userr == null)
+            Comment.data = DateTime.Now;var userr = _context.Accounts.First(a => a.Username == HttpContext.Session.GetString("username"));
+            Comment.Account1 = userr;
+            if (Comment.Account1.Username == null)
             {
-                Comment.userr = "niezalogowany";
+                Comment.Account1.Username = "niezalogowany";
             }
             string adres = "/ForumUzytkownika/Details?id=" + Forum.ID;
             _context.Commment.Add(Comment);
             await _context.SaveChangesAsync();
-            var userr = _context.Accounts.First(a => a.Username == HttpContext.Session.GetString("username"));
+            
             userr.komentarze++;
 
             if (userr.komentarze == 10)

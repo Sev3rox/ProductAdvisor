@@ -2,7 +2,7 @@
 @model webapp.Pages.Products.CompareProductsModel
 @{ var cookieValue = Request.Cookies["MyCookie"]; }
 @{
-    ViewData["Title"] = "Obsługa rezerwacji";
+    ViewData["Title"] = "Compare";
     Layout = "../Shared/_LayoutUser.cshtml";
 }
 
@@ -87,6 +87,6 @@
 <p>Brak produktów do porównania</p>}
 
     <div>
-        <a asp-page="Index">Zakończ porównywanie</a>
+        <a asp-page="IndexUser">Zakończ porównywanie</a>
     </div>
 </div>

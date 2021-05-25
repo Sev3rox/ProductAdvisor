@@ -14,6 +14,8 @@ namespace webapp.Models
         [Display(Name = "Treść")]
         public string tresc { get; set; }
         [Display(Name = "Data dodania")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime data { get; set; }
         [Display(Name = "Dodał")]
         public string userr { get; set; }

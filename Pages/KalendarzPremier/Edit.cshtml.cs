@@ -26,14 +26,19 @@ namespace webapp.Pages.KalendarzPremier
         public Product Product { get; set; }
         [BindProperty]
         public IFormFile Upload { get; set; }
-
+        public Account account { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
+            var username = HttpContext.Session.GetString("username");
+            account = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+            if (account == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+            if (account.role == 0)
+                return RedirectToPage("../Common/NoAccessUser");
             Product = await _context.Product
                 .Include(p => p.Company).FirstOrDefaultAsync(m => m.Id == id);
 

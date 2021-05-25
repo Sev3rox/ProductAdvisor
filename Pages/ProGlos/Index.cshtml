@@ -2,7 +2,7 @@
 @model webapp.Pages.ProGlos.IndexModel
 
 @{
-    ViewData["Title"] = "Obsługa rezerwacji";
+    ViewData["Title"] = "ProductVotes";
     Layout = "../Shared/_LayoutWorker.cshtml";
 }
 
@@ -46,19 +46,17 @@
         <tbody>
             @foreach (var item in Model.ProductGlosowanie)
             {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Product.Description)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Głosowanie.Id)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-    </td>
-</tr>            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Głosowanie.Id)
+                </td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@item.GlosowanieId" asp-route-id2="@item.ProductId">Usuń</a>
+                </td>
+            </tr>            }
         </tbody>
     </table>
 </div>

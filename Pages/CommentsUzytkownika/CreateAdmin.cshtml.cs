@@ -61,10 +61,10 @@ namespace webapp.Pages.CommentsUzytkownika
             }
             Comment.ForumID = Forum.ID;
             Comment.data = DateTime.Now;
-            Comment.userr = HttpContext.Session.GetString("username");
-            if (Comment.userr == null)
+            Comment.Account1.Username = HttpContext.Session.GetString("username");
+            if (Comment.Account1.Username == null)
             {
-                Comment.userr = "niezalogowany";
+                Comment.Account1.Username = "niezalogowany";
             }
             string adres = "/ForumAdministratora/Details?id=" + Forum.ID;
             _context.Commment.Add(Comment);

@@ -1,0 +1,95 @@
+﻿@page
+@model webapp.Pages.Advertisements.AddProductToListModel
+@{ ViewData["Title"] = "AddAdvertisment";
+    Layout = "../Shared/_LayoutWorker.cshtml";}
+
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+
+    <form method="get">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    Wyszukiwanie
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group-append">
+                        <input class="form-control" asp-for="SearchTerm" />
+                        <button type="submit" class="btn btn-primary">Szukaj</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <h1>Produkty które możesz dodać:</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Company.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @for (int i = 0; i < Model.Products.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <img src="data:image;base64,@System.Convert.ToBase64String(@Model.Products[i].Image)" width="80" height="80" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Products[i].Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Products[i].Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Products[i].Company)
+                    </td>
+                    <td class="form-group">
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="pom.Id" value="@Model.Products[i].Id" />
+                            <input type="submit" name="submitButton" value="Dodaj" input />
+                        </form>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+    <div>
+        <a asp-page="./Index">Powrót</a>
+    </div>
+</div>

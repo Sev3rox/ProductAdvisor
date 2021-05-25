@@ -1,6 +1,6 @@
 ﻿@page
 @model webapp.Pages.ProfileModel
-@{ ViewData["Title"] = "Obsługa rezerwacji";
+@{ ViewData["Title"] = "Profile";
     Layout = "../Shared/_LayoutWorker.cshtml"; }
 
 
@@ -9,6 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Profile</title>
+    @Model.Msg
 </head>
 
 <body style="background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
@@ -37,10 +38,7 @@
                         <input type="password" asp-for="@Model.account.Password" />
                     </td>
 
-                    <td>
-                        <input name="ProfilePassword" type="image" src="~/Images/password.png"
-                               width="20" height="20" />
-                    </td>
+                   
                 </tr>
                 <tr>
                     <td>Email</td>

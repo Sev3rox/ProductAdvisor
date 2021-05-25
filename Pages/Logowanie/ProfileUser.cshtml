@@ -1,11 +1,12 @@
 ﻿@page
 @model webapp.Pages.ProfileUserModel
-@{ ViewData["Title"] = "Obsługa rezerwacji";
+@{ ViewData["Title"] = "Profile";
     Layout = "../Shared/_LayoutUser.cshtml"; }
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Profile</title>
+    @Model.Msg
 </head>
 <body>
     <style>
@@ -26,7 +27,7 @@
         padding: 10px;
 ">
         <h3>Profile</h3>
-        <form method="post" asp-page="profile">
+        <form method="post" asp-page="profileuser">
             <table>
                 <tr>
                     <td>Username</td>

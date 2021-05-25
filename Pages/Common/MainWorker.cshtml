@@ -1,6 +1,6 @@
 ﻿@page
 @model webapp.Pages.Common.MainWorkerModel
-@{ViewData["Title"] = "Obsługa rezerwacji";
+@{ViewData["Title"] = "MainPage";
     Layout = "../Shared/_LayoutWorker.cshtml"; }
 <style>
     body {
@@ -52,7 +52,7 @@
 
 
     <td>
-        <a asp-page="../Products/Details" asp-route-id="@item.Id" asp-route-f="xyz">Szczegóły</a>
+        <a asp-page="../Products/Details" asp-route-id="@item.Id" asp-route-f="main">Szczegóły</a>
     </td>
     <td>
     </td>

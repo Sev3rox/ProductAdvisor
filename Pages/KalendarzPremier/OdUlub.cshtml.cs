@@ -47,6 +47,10 @@ namespace webapp.Pages.KalendarzPremier
 
             var username = HttpContext.Session.GetString("username");
             account = _context.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+            if (account == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+            if (account.role != 0)
+                return RedirectToPage("../Common/NoAccessWorker");
             var procat = _context.Ulubione.First(row => row.AccountId == account.Id && row.ProductId == id);
 
             _context.Ulubione.Remove(procat);

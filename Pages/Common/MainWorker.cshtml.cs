@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using webapp.Data;
@@ -18,9 +19,15 @@ namespace webapp.Pages.Common
         {
             db = _db;
         }
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-        
+            var username = HttpContext.Session.GetString("username");
+            var accountt = db.Accounts.SingleOrDefault(a => a.Username.Equals(username));
+            if (accountt == null)
+                return RedirectToPage("../Common/NoAccessNotLoged");
+            if (accountt.role == 0)
+                return RedirectToPage("../Common/NoAccessUser");
+
             var produkty = db.Product.ToList();
             List<KeyValuePair<float, Product>> list = new List<KeyValuePair<float, Product>>();
             List<KeyValuePair<float, Product>> list3 = new List<KeyValuePair<float, Product>>();
@@ -59,6 +66,7 @@ namespace webapp.Pages.Common
                 }
 
             }
+            return Page();
         }
     }
 }

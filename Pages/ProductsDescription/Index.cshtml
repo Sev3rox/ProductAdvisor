@@ -1,29 +1,43 @@
 ﻿@page
 @model webapp.Pages.ProductsDescription.IndexModel
 
-@{
-    ViewData["Title"] = "Obsługa rezerwacji";
-    Layout = "../Shared/_LayoutWorker.cshtml";
-}
+@{ ViewData["Title"] = "ProductDescriptions";
+                Layout = "../Shared/_LayoutWorker.cshtml"; }
+<style>
+    body {
+        background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
 
-<h1>Dodane/zgłoszone do poprawki opisy</h1>
+<div style="        width: auto;
+        background: rgb(255, 255, 255); /* Fallback for older browsers without RGBA-support */
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: solid;
+        border-width: 1px;
+        padding: 10px;
+">
+    <h1>Dodane/zgłoszone do poprawki opisy</h1>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductDescription[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductDescription[0].Product)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductDescription[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductDescription[0].Product)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
-    @foreach (var item in Model.ProductDescription)
-    {
+        @foreach (var item in Model.ProductDescription)
+        {
 @if (item.hasBeenRead == false)
 {
 <tbody id="unread" style="background-color: #FFFF99">
@@ -43,9 +57,10 @@
             </form>
         </td>
     </tr>
-</tbody> }
-                else
-                {
+</tbody>
+ }
+else
+{
 <tbody>
     <tr>
         <td>
@@ -59,7 +74,6 @@
             <a asp-page="./Delete" asp-route-id="@item.Id">Usuń</a>
         </td>
     </tr>
-</tbody>
-}}
-</table>
+</tbody>}}
+    </table>
 

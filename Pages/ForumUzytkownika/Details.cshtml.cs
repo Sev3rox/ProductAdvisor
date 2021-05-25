@@ -22,12 +22,12 @@ namespace webapp.Pages.ForumUzytkownika
         [BindProperty]
         public Forum Forum { get; set; }
         public Comment comment;
-
+        public Account accountt { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
 
             var usernamee = HttpContext.Session.GetString("username");
-            var accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
+            accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
             if (accountt == null)
                 return RedirectToPage("../Common/NoAccessNotLoged");
             if (id == null)

@@ -26,14 +26,16 @@ namespace webapp.Pages.Products
         public double srednia { get; set; }
         public List<ReviewProduct> Recenzje { get; set; }
         public List<CommentReview> comrecenzje1 { get; set; }
-        public string pomstr;
 
-        public async Task<IActionResult> OnGetAsync(int? id, string f)
+
+        public string xyz = null;
+      
+
+           
+            public async Task<IActionResult> OnGetAsync(int? id, string f)
         {
-            if (f == "xyz")
-            {
-                pomstr = "xyz";
-            }
+            if (f == "main")
+                xyz = "11";
             var usernamee = HttpContext.Session.GetString("username");
             var accountt = _context.Accounts.SingleOrDefault(a => a.Username.Equals(usernamee));
             if (accountt == null)

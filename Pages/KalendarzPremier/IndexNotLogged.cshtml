@@ -1,8 +1,8 @@
 ﻿@page
-@model webapp.Pages.KalendarzPremier.IndexUserModel
+@model webapp.Pages.KalendarzPremier.IndexNotLoggedModel
 
-@{ ViewData["Title"] = "IndexUser";
-                Layout = "../Shared/_LayoutUser.cshtml"; }
+@{ ViewData["Title"] = "Calendar";
+                Layout = "../Shared/_LayoutNotLoged.cshtml"; }
 <style>
     body {
         background-image: url(http://www.barwonfoods.com/wp-content/uploads/2014/04/ESP-69.jpg);
@@ -20,11 +20,8 @@
         border-width: 1px;
         padding: 10px;
 ">
-    <h1>IndexUser</h1>
+    <h1>Index</h1>
 
-    <p>
-        <a asp-page="Create">Create New</a>
-    </p>
     <form method="get">
         <div class="container">
             <div class="row">
@@ -92,8 +89,7 @@
         @Html.DisplayFor(modelItem => item.Premiera)
     </td>
     <td>
-        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-        <a asp-page="./Ulub" asp-route-id="@item.Id">Ulubione</a>
+        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
     </td>
 </tr>            }
         </tbody>

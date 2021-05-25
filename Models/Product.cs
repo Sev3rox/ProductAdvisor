@@ -35,6 +35,7 @@ namespace webapp.Models
         public Company Company { get; set; }
         [Display(Name = "Firma")]
         public int CompanyID { get; set; }
+        public bool forAdvertising { get; set; }
 
         public ICollection<Ulubione> UlubioneBy { get; set; }
         public ICollection<ProductGlosowanie> Glosowanies { get; set; }

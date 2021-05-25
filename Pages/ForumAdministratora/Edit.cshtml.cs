@@ -23,6 +23,7 @@ namespace webapp.Pages.ForumAdministratora
 
         [BindProperty]
         public Forum Forum { get; set; }
+        public Forum Forum1 { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -51,14 +52,17 @@ namespace webapp.Pages.ForumAdministratora
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            _context.Attach(Forum).State = EntityState.Modified;
+            Forum1 = await _context.Forum.FirstOrDefaultAsync(m => m.ID == id);
+            Forum1.name = Forum.name;
+            Forum1.data = Forum.data;
+            Forum1.tresc = Forum.tresc;
+            _context.Attach(Forum1).State = EntityState.Modified;
 
             try
             {

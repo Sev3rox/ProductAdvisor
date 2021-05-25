@@ -22,16 +22,20 @@ namespace webapp.Pages.ProGlos
         [BindProperty]
         public ProductGlosowanie ProductGlosowanie { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id,int? id2)
         {
             if (id == null)
+            {
+                return NotFound();
+            }
+            if (id2 == null)
             {
                 return NotFound();
             }
 
             ProductGlosowanie = await _context.ProductGlosowanie
                 .Include(p => p.Głosowanie)
-                .Include(p => p.Product).FirstOrDefaultAsync(m => m.GlosowanieId == id);
+                .Include(p => p.Product).FirstOrDefaultAsync(m => (m.GlosowanieId == id && m.ProductId==id2));
 
             if (ProductGlosowanie == null)
             {
@@ -40,14 +44,18 @@ namespace webapp.Pages.ProGlos
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id,int? id2)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            if (id2 == null)
+            {
+                return NotFound();
+            }
 
-            ProductGlosowanie = await _context.ProductGlosowanie.FindAsync(id);
+            ProductGlosowanie = await _context.ProductGlosowanie.FindAsync(id,id2);
 
             if (ProductGlosowanie != null)
             {

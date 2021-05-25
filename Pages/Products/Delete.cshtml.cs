@@ -37,7 +37,7 @@ namespace webapp.Pages.Products
                 return NotFound();
             }
 
-
+            Product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Product == null)
             {

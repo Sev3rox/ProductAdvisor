@@ -1,7 +1,7 @@
 ﻿@page
 @model webapp.Pages.Categories.IndexModel
 
-@{ ViewData["Title"] = "Index";
+@{ ViewData["Title"] = "Categories";
                 Layout = "../Shared/_LayoutWorker.cshtml"; }
 
 <style>
@@ -58,8 +58,8 @@
     <td>
         <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
         <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-        <a asp-page="./CatPro" asp-route-id="@item.ID">Produkty</a>
+        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a> |
+        <a href="/Products/Index?SearchTerm=&CategoryTerm=@Html.DisplayFor(modelItem => item.cName)&SelectedTags=">Produkty</a>
     </td>
 </tr>            }
         </tbody>

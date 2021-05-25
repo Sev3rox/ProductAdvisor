@@ -14,9 +14,12 @@ namespace webapp.Models
         [Required]
         public string komentarz { get; set; }
         [Display(Name = "Data dodania")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime data { get; set; }
         [Display(Name = "Dodał")]
-        public string userr { get; set; }
+        public int Account1ID { get; set; }
+        public Account Account1 { get; set; }
         public bool hidden { get; set; }
         [Display(Name = "Forum")]
         public int ForumID { get; set; }

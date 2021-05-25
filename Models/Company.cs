@@ -20,6 +20,8 @@ namespace webapp.Models
         public string Description { get; set; }
         [Display(Name = "Data założenia")]
         [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         [Display(Name = "Lokalizacja")]
         [Required]

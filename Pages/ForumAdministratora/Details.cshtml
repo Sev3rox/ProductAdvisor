@@ -54,74 +54,132 @@
             </dd>
         </dl>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Forum.Comments)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Forum.Comments)
+    <div class="container">
+        <h4>Komentarze (@Model.comments.Count)</h4>
+        <div class="row">
+            @foreach (var item in Model.comments)
             {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.komentarz)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.data)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.userr) |
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Prawa
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @if (@Model.uzytkownik.role != 2)
-                {
-                    @if (@Model.uzytkownik.role2 == 2)
-                    {
-                        <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="odblokujKomentowanie">Odblokuj komentowanie</a>
-                    }
-                    else
-                    {
-                        <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="zablokujKomentowanie">Zablokuj komentowanie</a>
-                    }
-                    <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="zbanuj">Zbanuj</a>
-                    @if (@Model.uzytkownik.role2 != 1)
-                    {
-                        <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="wyroznij">Wyróżnij</a>
-                    }
-                    else
-                    {
-                        <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="cofnijWyroznienie">Cofnij wyróżnienie</a>
-                    }
-                }
-                else
-                {
-                    <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@Model.uzytkownik.Id" asp-route-idRole="odbanuj">Odbanuj</a>
-                }
-            </div>
+                <div class="col-md-8">
+                    <div class="media g-mb-30 media-comment">
+                        <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                            <div class="g-mb-15">
+                                <h5 class="h5 g-color-gray-dark-v1 mb-0">
+                                    @Html.DisplayFor(modelItem => item.Account1.Username)
+                                    <div id="div1" class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Prawa
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            @if (item.Account1.role2 == 2)
+                                            {
+                                                <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@item.Account1.Username" asp-route-idRole="odblokujKomentowanie">Odblokuj komentowanie</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@item.Account1.Username" asp-route-idRole="zablokujKomentowanie">Zablokuj komentowanie</a>
+                                            }
+                                            @if (item.Account1.role2 != 1)
+                                            {
+                                                <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@item.Account1.Username" asp-route-idRole="wyroznij">Wyróżnij</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@item.Account1.Username" asp-route-idRole="cofnijWyroznienie">Cofnij wyróżnienie</a>
+                                            }
+                                            @if (item.Account1.role != 2)
+                                            {
+                                                <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@item.Account1.Username" asp-route-idRole="zbanuj">Zbanuj</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="nav-link text-dark" asp-area="" asp-page="./ZmianaPraw" asp-route-idForum="@item.ForumID" asp-route-idUser="@item.Account1.Username" asp-route-idRole="odbanuj">Odbanuj</a>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div id="div2">
+                                        <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@item.Account1.Username" asp-route-xpom="kom" asp-route-pid="@item.ForumID">Profil użytkownika</a>
+                                    </div>
+
+                                </h5>
+                                <span class="g-color-gray-dark-v4 g-font-size-12">@item.data</span>
+                            </div>
+                            <p>
+                                @item.komentarz
+                            </p>
+                            <a asp-page="/CommentsUzytkownika/Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-page="/CommentsUzytkownika/Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-page="/CommentsUzytkownika/Delete" asp-route-id="@item.ID">Delete</a> 
+                            <a>
+                                @if (item.hidden == false)
+                                {
+                                    <form method="post" enctype="multipart/form-data">
+                                        <input type="hidden" asp-for="Forum.ID" value="@item.ID" />
+                                        <input type="submit" name="submitButton" value="Ukryj" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form method="post" enctype="multipart/form-data">
+                                        <input type="hidden" asp-for="Forum.ID" value="@item.ID" />
+                                        <input type="submit" name="submitButton" value="Odkryj" />
+                                    </form>
+                                }
+                            </a>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-    </td>
-    <td>
-        <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-        <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a> |
-               <td>
-                                    <a asp-page="../Prawa/Details" asp-route-id="0" asp-route-userr="@item.userr" asp-route-xpom="kom" asp-route-pid="@item.ForumID">Profil użytkownika</a>
-                                </td>
-   
-    </td>
-</tr>            }
-        </tbody>
-    </table>
+    </div>
     <div>
         <a asp-page="./Edit" asp-route-id="@Model.Forum.ID">Edit</a> |
-     
+
         <a asp-page="./Index">Back to List</a>
     </div>
+    
+    
 </div>
+<style>
+    body{
+    margin-top:20px;
+}
+
+.g-height-50 {
+    height: 50px;
+}
+
+.g-width-50 {
+    width: 50px !important;
+}
+
+    #div1 {
+        display: inline-block;
+    }
+
+    #div2 {
+        display: inline-block;
+    }
+.g-bg-secondary {
+    background-color: #fafafa !important;
+}
+
+.u-shadow-v18 {
+    box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+}
+
+.g-color-gray-dark-v4 {
+    color: #777 !important;
+}
+
+.g-font-size-12 {
+    font-size: 0.85714rem !important;
+}
+
+.media-comment {
+    margin-top:20px
+}
+</style>

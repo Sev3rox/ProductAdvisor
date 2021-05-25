@@ -2,7 +2,7 @@
 @model webapp.Pages.Companies.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Companies";
     Layout = "../Shared/_LayoutWorker.cshtml";
 }
 
@@ -49,12 +49,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.catsss[0].Description)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.catsss[0].Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.catsss[0].Location)
-                </th>
                 <th></th>
             </tr>
         </thead>
@@ -74,15 +68,9 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Location)
-                    </td>
-                    <td>
                         <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                         <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a> 
                        
                     </td>
                 </tr>

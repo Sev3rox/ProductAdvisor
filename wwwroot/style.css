@@ -1,4 +1,48 @@
-﻿.rating {
+﻿body {
+    margin-top: 20px;
+    background: #eee;
+}
+
+}
+
+.g-height-50 {
+    height: 50px;
+}
+
+.g-width-50 {
+    width: 50px !important;
+}
+
+#div1 {
+    display: inline-block;
+}
+
+#div2 {
+    display: inline-block;
+}
+
+.g-bg-secondary {
+    background-color: #fafafa !important;
+}
+
+.u-shadow-v18 {
+    box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+}
+
+.g-color-gray-dark-v4 {
+    color: #777 !important;
+}
+
+.g-font-size-12 {
+    font-size: 0.85714rem !important;
+}
+
+.media-comment {
+    margin-top: 20px
+}
+
+
+.rating {
     float: left;
 }
 
